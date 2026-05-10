@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Analytics Tool</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="masthead">
+        <div>
+          <p class="eyebrow">CSV analytics workspace</p>
+          <h1>Data Analytics Tool</h1>
+          <p class="intro">
+            Upload a CSV file, clean common data issues, explore statistics,
+            create charts, and export the cleaned result.
+          </p>
+        </div>
+        <div class="upload-card">
+          <label class="file-drop" for="csvUpload">
+            <span>Upload CSV file</span>
+            <strong id="fileName">No file selected</strong>
+            <input id="csvUpload" type="file" accept=".csv,text/csv" />
+          </label>
+          <button id="sampleButton" type="button">Load sample data</button>
+        </div>
+      </header>
+
+      <section class="metric-grid" aria-label="Dataset overview">
+        <article class="metric">
+          <span>Rows</span>
+          <strong id="rowCount">0</strong>
+        </article>
+        <article class="metric">
+          <span>Columns</span>
+          <strong id="columnCount">0</strong>
+        </article>
+        <article class="metric">
+          <span>Missing cells</span>
+          <strong id="missingCount">0</strong>
+        </article>
+        <article class="metric">
+          <span>Numeric columns</span>
+          <strong id="numericCount">0</strong>
+        </article>
+      </section>
+
+      <section class="workspace-grid">
+        <aside class="panel controls-panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Prepare data</p>
+            <h2>Controls</h2>
+          </div>
+
+          <div class="control-group">
+            <h3>Column Filtering</h3>
+            <div id="columnFilters" class="checkbox-list empty-state">
+              Upload a CSV to choose visible columns.
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Sorting Data</h3>
+            <label for="sortColumn">
+              Sort column
+              <select id="sortColumn"></select>
+            </label>
+            <label for="sortDirection">
+              Direction
+              <select id="sortDirection">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </label>
+            <button id="applySort" type="button">Apply sort</button>
+          </div>
+
+          <div class="control-group">
+            <h3>Data Cleaning Options</h3>
+            <div class="button-stack">
+              <button id="removeMissing" type="button">Remove rows with missing values</button>
+              <button id="fillMissing" type="button">Fill missing values</button>
+              <button id="removeDuplicates" type="button">Remove duplicate rows</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <h3>Interactive Charts</h3>
+            <label for="chartType">
+              Chart type
+              <select id="chartType">
+                <option value="bar">Bar</option>
+                <option value="line">Line</option>
+                <option value="scatter">Scatter</option>
+              </select>
+            </label>
+            <label for="xColumn">
+              X column
+              <select id="xColumn"></select>
+            </label>
+            <label for="yColumn">
+              Y column
+              <select id="yColumn"></select>
+            </label>
+            <button id="drawChart" type="button">Generate chart</button>
+          </div>
+
+          <div class="control-group">
+            <h3>Export</h3>
+            <div class="button-stack">
+              <button id="downloadCsv" type="button">Download cleaned CSV</button>
+              <button id="downloadReport" type="button">Download report</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="main-panels">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Data preview table</p>
+                <h2>Preview</h2>
+              </div>
+              <span id="previewNote" class="status-pill">Waiting for CSV</span>
+            </div>
+            <div id="dataPreview" class="table-wrap empty-state">
+              Upload a CSV file or load the sample dataset to begin.
+            </div>
+          </article>
+
+          <div class="split-grid">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Missing value detection</p>
+                  <h2>Missing Values</h2>
+                </div>
+              </div>
+              <div id="missingValues" class="table-wrap empty-state">No dataset loaded.</div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Summary statistics</p>
+                  <h2>Numeric Summary</h2>
+                </div>
+              </div>
+              <div id="summaryStats" class="table-wrap empty-state">No numeric data yet.</div>
+            </article>
+          </div>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Correlation matrix</p>
+                <h2>Numeric Correlations</h2>
+              </div>
+            </div>
+            <div id="correlationMatrix" class="table-wrap empty-state">
+              Need at least two numeric columns.
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Generated visualization</p>
+                <h2>Chart</h2>
+              </div>
+            </div>
+            <div id="chartArea" class="chart-area empty-state">
+              Choose columns and generate a chart.
+            </div>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
